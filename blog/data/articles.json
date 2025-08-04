@@ -1,0 +1,84 @@
+{
+  "articles": [
+    {
+      "id": "networks",
+      "title": "The Internet in Africa is Just a Connection to Europe",
+      "category": "Networks",
+      "date": "July 14, 2025",
+      "image": "network-africa.jpg",
+      "content": [
+        "Every time I start a new computer networks class, I tell my students the same thing: \"The Internet in Africa is just a connection to Europe.\" I tell them if you could dig a hole from here in Uganda, lay a cable, and connect it to a computer or a phone in London, you would never have to pay for the internet again.",
+        "Of course, it's a simplification. But it's a useful one. It cuts through the jargon and reveals a fundamental truth about our digital infrastructure. Right now, for an email to go from Kampala to Nairobi, it often has to travel thousands of kilometers to Europe and back again. This isn't just inefficient; it's a form of digital bloat that holds us back. It's like having to drive across the continent just to visit your neighbor. It works, but it's slow, expensive, and completely unnecessary.",
+        "This is the legacy of how our internet was built—as spokes on a wheel, with the hub always somewhere else. But the future doesn't have to look like the past.",
+        "What if we changed the narrative? What if, when I teach my students, I could say, \"The internet is a connection to Kenya, to Tanzania, to the DRC, to South Sudan\"? What if our primary links were with each other?",
+        "This isn't a dream. It's a practical engineering challenge, and it's one we can solve. It means building more Internet Exchange Points (IXPs) right here. It means laying more terrestrial fiber across our borders. It means convincing our local providers that peering with a network in Kinshasa is just as valuable—if not more so—than peering with one in Paris. It means creating a robust, resilient, and truly <em>African</em> network.",
+        "A network where data created in Africa, for Africans, stays in Africa. A network that is simple, efficient, and reliable."
+      ]
+    },
+    {
+      "id": "automotive",
+      "title": "The Soul of the Machine",
+      "category": "Automotive",
+      "date": "July 14, 2025",
+      "image": "land-cruiser.jpg",
+      "content": [
+        "I'm sad that cars have become disposable. It seems no one buys a vehicle they intend to keep for ten years, and manufacturers have followed suit. We're surrounded by machines packed with electronics designed for a limited lifespan, where a single failed, non-repairable module can render the entire vehicle useless. We've accepted that a car's value is measured by the size of its infotainment screen rather than the integrity of its engineering. But I believe in a different philosophy—one where a machine is valued for its durability, its simplicity, and its ability to be maintained.",
+        "This isn't just a preference; it's a pragmatic worldview rooted in my experience as an engineer. My core belief, whether I'm looking at software or a transmission, is in an \"anti-bloat\" design. A system should do its job perfectly without unnecessary complexity.",
+        "Here in Africa, that theory is tested daily. Every quarter, I find myself needing 4L or 4H, and there is one vehicle that stands as a masterpiece of engineering for this environment: the Land Cruiser 80 Series. It's not about nostalgia; it's about purpose. It's a vehicle built with the understanding that it will face harsh conditions and will need to be repaired far from a dealership, often with basic tools. It has what it needs to do its job, and nothing more. That, to me, is the definition of good design.",
+        "This isn't about being stuck in the past. It's about recognizing that we're losing something important. We're trading the soul of the machine for a list of features. We're giving up the satisfaction of understanding and maintaining our own vehicles for the convenience of a disposable appliance. We should demand more from our technology, whether it has four wheels or a circuit board. We should demand things that are built to last."
+      ]
+    },
+    {
+      "id": "aviation",
+      "title": "The Simple Genius of the Turbofan",
+      "category": "Aviation",
+      "date": "July 14, 2025",
+      "image": "turbofan-engine.jpg",
+      "content": [
+        "I'm a pilot, and while I love the reciprocating engines I fly, the engineer in me is always slightly uneasy. There is just so much going on inside them—so many moving parts, so many potential points of failure, and so many different materials with different heat coefficients, all expanding at different rates. And someone thought to put that on an airplane. It's a marvel that it works so well, but it's a complex one.",
+        "That's why I truly love the turbofan engine. It's a marvel of simplicity and efficiency. While a turboprop is impressive, the turbofan's core principle—a giant fan at the front pushing a huge volume of air <em>around</em> the core engine—is a masterclass in \"anti-bloat\" design. The engine's primary job is to spin that fan. It's a beautifully focused and powerful solution that solves the problem of thrust with incredible elegance.",
+        "This is what I love about great engineering: it solves a complex problem with a simple, robust answer. My dream job isn't just flying jets one day; it's working on the software for the control systems that manage these incredible machines. I want to be one of the people who understands and refines that bridge between the pilot's intent and the engine's raw power.",
+        "For me, the perfect aircraft is the Cessna 208 Caravan. It's the aviation equivalent of a Land Cruiser—a rugged, reliable workhorse that can handle challenging environments without unnecessary complexity. It embodies the same philosophy as the turbofan: it does its job perfectly. My ideal life would be to combine both my worlds: continuing my work as a systems engineer while also serving as a part-time instructor on the C208. It's all about mastering and teaching the systems that work."
+      ]
+    },
+    {
+      "id": "linux",
+      "title": "My Operating System is a Land Cruiser",
+      "category": "Linux",
+      "date": "July 14, 2025",
+      "image": "ubuntu-terminal.jpg",
+      "content": [
+        "Software today is bloated. Operating systems, applications—they all seem to suffer from a desire to be everything to everyone, packed with features I'll never use and visual \"bling\" that just gets in the way. That's why I use Ubuntu.",
+        "To me, Ubuntu is the Land Cruiser 79 Series of operating systems. It's simple, powerful, and utterly reliable. The package manager is straightforward, and the entire system is easy to understand and maintain. It doesn't distract me with unnecessary lights and fluff; it just provides a rock-solid foundation for me to do my work.",
+        "I loved Linux so much that I once packed an old machine with as many network PCI cards as it could hold, determined to build my own BGP router from scratch. I wanted to enjoy both worlds: the simplicity of the Linux command line and the marvel of what I could achieve with it. It was only later, when I started working for an ISP, that I had a realization: what I had built was, in principle, what a carrier-grade Juniper router is all about.",
+        "My fight against bloat has led me to a new project: building my own minimal desktop environment on top of the Ubuntu kernel. The idea is to have a simple Django application that serves everything I need: my VS Code editor, an email client, a web browser, and a custom terminal for my network engineering tasks. Nothing more. It's about creating the perfect tool for the job, stripped of everything that doesn't serve a direct purpose."
+      ]
+    },
+    {
+      "id": "python",
+      "title": "The Language That Speaks to Machines",
+      "category": "Python",
+      "date": "July 14, 2025",
+      "image": "python-microcontroller.jpg",
+      "content": [
+        "I work with embedded systems every day, and the biggest challenge is often the gap between the hardware and the software. You can have a brilliant microcontroller, but if it's difficult to program, its potential is locked away. This is where Python has been a game-changer for me.",
+        "Python, and specifically MicroPython, is the language that lets me \"speak\" to machines. It has all the libraries and utilities I need to make microcontrollers interactive and intelligent. The fact that I can now use the same high-level language to write a web application and to control a tiny ESP32 board is incredibly powerful. It simplifies the entire development process.",
+        "I also believe some of Python's greatest strengths are underrated. People often jump to big frameworks, but I think <strong>Flask</strong> is one of the most valuable tools for learning. It was only after I truly understood Flask that the architecture of a complex framework like Django made sense. It teaches you the fundamentals of web development from the ground up.",
+        "Similarly, <strong>Object-Oriented Programming (OOP)</strong> is a concept that is often taken for granted. It was only after I began learning OOP—and I cannot say I have fully learned it—that I started thinking about how the human lungs do what they do. I tried to break down the respiratory system into code, including the complex makeup of the air we breathe and a function or method to extract energy from that air. It got incredibly complex, but the exercise was profound. The fundamental understanding of breaking a system down into its core objects and functions is what makes OOP a true marvel."
+      ]
+    },
+    {
+      "id": "embedded",
+      "title": "The Hidden Genius All Around Us",
+      "category": "Embedded",
+      "date": "July 14, 2025",
+      "image": "embedded-systems.jpg",
+      "content": [
+        "We're surrounded by clever embedded systems, but most of them are hidden in plain sight. Take your smart TV. We see it as a screen, but as an engineer, I see a masterpiece of embedded systems design.",
+        "Think about it: it's a single device that has to manage HDMI and USB interfaces, decode dozens of video and audio formats, run a full operating system with an app store, and maintain a constant network connection. All of this has to work seamlessly, reliably, and without the user ever thinking about the complexity under the hood.",
+        "The same is true for an Airbus A350, which people think is highly automated but is actually a complex collaboration between the pilot and countless embedded control systems. That's why my preferred seat on a commercial aircraft is around the wings. Before the flight, the pilot will set the flaps and you will hear the motors spin up as they take their set positions. I don't know if anyone thinks of how far away the pilot is seated from the control surfaces they are sending commands to. These motors have to send feedback to the pilot to say they are actually in the correct position. For me, that is all the entertainment I need. The icing on the cake is how the autopilot works with all the control surfaces to keep the machine where the pilot has set it, guided by what the Flight Management System (FMS) is telling it to do. The screens are just the 'mouth pieces' of the machine telling the pilots 'you told me to do this, I am doing it.'",
+        "When it comes to my own quick projects, my go-to is an <strong>ESP32</strong>. It's about choosing the right tool for the job—a tool that is powerful, efficient, and doesn't come with unnecessary baggage. It's the same philosophy, whether it's in a smart TV or on my workbench."
+      ]
+    }
+  ]
+}
