@@ -1,10 +1,24 @@
 {
   "articles": [
     {
+      "id": "art-of-maintenance",
+      "title": "The Most Important Tool is Patience",
+      "category": "Automotive",
+      "date": "2025-08-04",
+      "image": "art-of-maintenance.jpg",
+      "content": [
+        "There’s a conversation that happens between you and a machine when you’re the one who keeps it alive. It's a language of sounds, feelings, and vibrations that speaks of tolerance, stress, and wear. It's a language I've spent years learning, and I rarely let a mechanic interrupt it. But recently, it was my wife’s car that started talking, and it began with a flat tyre. \"Not a problem,\" I thought, and called the tyre repair man from the local fuel station with the exact size.",
+        "He showed up with a tyre 1.5 inches taller than the other three. I looked at the tyre, then at him, and realised the conversation had to change. I had to explain that this car has an ABS system that constantly measures the speed of each wheel; a bigger wheel would spin slower and throw the entire system into a state of digital confusion. It has electric power steering that relies on perfect balance. A single, oversized tyre would make the car unstable, fighting itself with every rotation. He looked at me, then at the tyre, and I could see the disconnect. In that moment, I wasn't just fixing a flat; I was confronting a bigger question: we love getting new technology, but have we set up the structures to properly maintain it?",
+        "Understanding that technology is the first step, and for me, it always starts with listening. A healthy engine starting is a predictable orchestra. You have the sharp whine of the starter motor, the first loud, confident explosions of combustion, and then the deep, rhythmic \"thurddy grrr\" of the camshaft pushing the valves open and closed. You can hear the soft \"pop\" of the intake manifold and the lulling hush of the silencer telling the engine, “Not so loud.” It’s a symphony of controlled power. A sick engine sings a different tune—a hesitant cough, a metallic click, a whining belt. I’ve taught a class where we’ve silenced each of those sounds, one by one, and the students have had to diagnose the problem just by listening to what was missing. It’s a skill that requires you to tune out the noise and focus on the machine's true voice.",
+        "Of course, the most important tool in diagnostics isn't a stethoscope; it's patience. I remember rushing through a simple brake job once, a task I’d done a dozen times. I was tired, frustrated, and wanted it done. In my haste, I cross-threaded a bolt on the caliper. A simple mistake, born from impatience, turned a one-hour job into a four-hour ordeal of drilling, re-tapping, and a desperate search for a replacement part. The machine didn't care about my schedule. It only responded to the correct process, done with care. That bolt taught me a lesson that no manual ever could: fighting with a machine is a battle you will always lose. You have to work with it.",
+        "And that’s the marvel of it. When you buy a machine, you are buying the final product of its creator's imagination. From that point on, it’s up to you to continue the conversation. I believe not all machines are for everyone, and that's the beauty of choice. I look at modern Volvo drivers, and I don't see them changing a tyre themselves. That’s okay. The car is designed to be a sealed system, a comfortable appliance that insulates you from the mechanical world. It's designed to be taken to a garage every time something goes wrong. For some, that’s a feature. For me, it’s a conversation I’m not willing to miss."
+      ]
+    },
+    {
       "id": "networks",
       "title": "The Internet in Africa is Just a Connection to Europe",
       "category": "Networks",
-      "date": "July 14, 2025",
+      "date": "2025-07-21",
       "image": "network-africa.jpg",
       "content": [
         "Every time I start a new computer networks class, I tell my students the same thing: \"The Internet in Africa is just a connection to Europe.\" I tell them if you could dig a hole from here in Uganda, lay a cable, and connect it to a computer or a phone in London, you would never have to pay for the internet again.",
@@ -19,7 +33,7 @@
       "id": "automotive",
       "title": "The Soul of the Machine",
       "category": "Automotive",
-      "date": "July 14, 2025",
+      "date": "2025-07-14",
       "image": "land-cruiser.jpg",
       "content": [
         "I'm sad that cars have become disposable. It seems no one buys a vehicle they intend to keep for ten years, and manufacturers have followed suit. We're surrounded by machines packed with electronics designed for a limited lifespan, where a single failed, non-repairable module can render the entire vehicle useless. We've accepted that a car's value is measured by the size of its infotainment screen rather than the integrity of its engineering. But I believe in a different philosophy—one where a machine is valued for its durability, its simplicity, and its ability to be maintained.",
@@ -32,7 +46,7 @@
       "id": "aviation",
       "title": "The Simple Genius of the Turbofan",
       "category": "Aviation",
-      "date": "July 14, 2025",
+      "date": "2025-07-07",
       "image": "turbofan-engine.jpg",
       "content": [
         "I'm a pilot, and while I love the reciprocating engines I fly, the engineer in me is always slightly uneasy. There is just so much going on inside them—so many moving parts, so many potential points of failure, and so many different materials with different heat coefficients, all expanding at different rates. And someone thought to put that on an airplane. It's a marvel that it works so well, but it's a complex one.",
@@ -45,7 +59,7 @@
       "id": "linux",
       "title": "My Operating System is a Land Cruiser",
       "category": "Linux",
-      "date": "July 14, 2025",
+      "date": "2025-06-30",
       "image": "ubuntu-terminal.jpg",
       "content": [
         "Software today is bloated. Operating systems, applications—they all seem to suffer from a desire to be everything to everyone, packed with features I'll never use and visual \"bling\" that just gets in the way. That's why I use Ubuntu.",
@@ -58,7 +72,7 @@
       "id": "python",
       "title": "The Language That Speaks to Machines",
       "category": "Python",
-      "date": "July 14, 2025",
+      "date": "2025-06-23",
       "image": "python-microcontroller.jpg",
       "content": [
         "I work with embedded systems every day, and the biggest challenge is often the gap between the hardware and the software. You can have a brilliant microcontroller, but if it's difficult to program, its potential is locked away. This is where Python has been a game-changer for me.",
@@ -71,7 +85,7 @@
       "id": "embedded",
       "title": "The Hidden Genius All Around Us",
       "category": "Embedded",
-      "date": "July 14, 2025",
+      "date": "2025-06-16",
       "image": "embedded-systems.jpg",
       "content": [
         "We're surrounded by clever embedded systems, but most of them are hidden in plain sight. Take your smart TV. We see it as a screen, but as an engineer, I see a masterpiece of embedded systems design.",

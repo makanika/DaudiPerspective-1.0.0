@@ -1,34 +1,69 @@
 {% extends "base.html" %}
 
 {% block content %}
-{% for article in articles %}
-    <!-- Article {{ loop.index }}: {{ article.category }} -->
-    <article id="{{ article.id }}">
-        <div class="article-meta">
-            {{ article.date }} • {{ article.category }}
-        </div>
-        
-        {% if article.image %}
-        <img src="{{ url_for('static', filename='images/' + article.image) }}" 
-             alt="{{ article.title }}" 
-             class="article-image">
-        {% endif %}
-        
-        <h2 class="text-2xl font-bold mb-4">
-            <a href="{{ url_for('article', article_id=article.id) }}" class="text-inherit no-underline hover:text-gray-700">
-                {{ article.title }}
-            </a>
-        </h2>
-        
-        <div class="article-body text-lg">
-            {% for paragraph in article.content %}
-                <p>{{ paragraph|safe }}</p>
-            {% endfor %}
-        </div>
-    </article>
+    {# Loop through the articles passed from the Flask app for the current page #}
+    {% for article in articles %}
+        <article id="{{ article.id }}">
+            <!-- Article metadata -->
+            <div class="article-meta">
+                {{ article.date }} • {{ article.category }}
+            </div>
+            
+            <!-- Article image, if available -->
+            {% if article.image %}
+            <img src="{{ url_for('static', filename='images/' + article.image) }}" 
+                 alt="{{ article.title }}" 
+                 class="article-image">
+            {% endif %}
+            
+            <!-- Article title, linking to the full article page -->
+            <h2 class="text-2xl font-bold mb-4">
+                <a href="{{ url_for('article', article_id=article.id) }}" class="text-inherit no-underline hover:text-gray-700">
+                    {{ article.title }}
+                </a>
+            </h2>
+            
+            <!-- Article preview: show only the first paragraph -->
+            <div class="article-body text-lg">
+                {% if article.content %}
+                    <p>{{ article.content[0]|safe }}</p>
+                {% endif %}
+                <!-- "Read More" link to the full article -->
+                <a href="{{ url_for('article', article_id=article.id) }}" class="text-sm font-semibold hover:text-gray-700" style="color: #5C554F;">Read More →</a>
+            </div>
+        </article>
 
-    {% if not loop.last %}
-    <hr class="article-divider">
-    {% endif %}
-{% endfor %}
+        <!-- Add a divider between articles, but not after the last one -->
+        {% if not loop.last %}
+        <hr class="article-divider">
+        {% endif %}
+    {% endfor %}
+
+    <!-- Pagination Navigation Controls -->
+    <nav class="flex justify-between items-center mt-16">
+        <div>
+            <!-- "Older Posts" link (goes to the next page) -->
+            <!-- This link only appears if the current page is not the last page -->
+            {% if page < total_pages %}
+                <a href="{{ url_for('index', page=page + 1) }}" class="text-lg nav-link">
+                    &larr; Older Posts
+                </a>
+            {% endif %}
+        </div>
+        
+        <!-- Page number indicator -->
+        <div class="text-gray-500">
+            Page {{ page }} of {{ total_pages }}
+        </div>
+
+        <div>
+            <!-- "Newer Posts" link (goes to the previous page) -->
+            <!-- This link only appears if the current page is not the first page -->
+            {% if page > 1 %}
+                <a href="{{ url_for('index', page=page - 1) }}" class="text-lg nav-link">
+                    Newer Posts &rarr;
+                </a>
+            {% endif %}
+        </div>
+    </nav>
 {% endblock %}

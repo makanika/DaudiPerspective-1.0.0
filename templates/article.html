@@ -1,29 +1,36 @@
 {% extends "base.html" %}
 
+{# Set the page title to the article's title #}
 {% block title %}{{ article.title }} - Daudi's Perspective{% endblock %}
 
 {% block content %}
 <article>
+    <!-- Article metadata -->
     <div class="article-meta">
         {{ article.date }} • {{ article.category }}
     </div>
     
+    <!-- Display the article image if one is specified -->
     {% if article.image %}
     <img src="{{ url_for('static', filename='images/' + article.image) }}" 
          alt="{{ article.title }}" 
          class="article-image">
     {% endif %}
     
+    <!-- Article title -->
     <h1 class="text-3xl font-bold mb-6">{{ article.title }}</h1>
     
+    <!-- Full article content -->
     <div class="article-body text-lg">
+        {# Loop through all paragraphs in the article's content array #}
         {% for paragraph in article.content %}
             <p>{{ paragraph|safe }}</p>
         {% endfor %}
     </div>
     
+    <!-- "Back to all articles" link -->
     <div class="mt-12 pt-6 border-t border-gray-200">
-        <a href="{{ url_for('index') }}" class="text-blue-600 hover:text-blue-800 font-medium">
+        <a href="{{ url_for('index') }}" class="font-medium nav-link">
             ← Back to all articles
         </a>
     </div>

@@ -4,25 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Daudi's Perspective{% endblock %}</title>
+    <!-- Tailwind CSS for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts for typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
     <style>
+        /* Base styles preserving the original design aesthetic */
         body {
-            background-color: #FDFDFB; /* A very light, warm off-white */
-            /* Subtle checkered pattern */
+            background-color: #FDFDFB; /* Warm off-white */
+            /* Subtle checkered background pattern */
             background-image:
                 linear-gradient(rgba(0,0,0,0.02) 1px, transparent 1px),
                 linear-gradient(to right, rgba(0,0,0,0.02) 1px, transparent 1px);
             background-size: 25px 25px;
             font-family: 'Lora', serif;
-            color: #403D39; /* A warm, dark gray for text */
+            color: #403D39; /* Warm, dark gray text */
         }
+        /* Headings and navigation font */
         h1, h2, h3, h4, h5, h6, nav {
             font-family: 'Lato', sans-serif;
-            color: #5C554F; /* A warmer, softer brown for headings */
+            color: #5C554F; /* Softer brown for headings */
         }
+        /* Styling for paragraphs within articles */
         .article-body p {
             margin-bottom: 1.25rem;
             line-height: 1.8;
@@ -31,6 +36,7 @@
             font-weight: 700;
             color: #252422;
         }
+        /* Divider style between articles on the main page */
         .article-divider {
             border: 0;
             height: 1px;
@@ -38,20 +44,23 @@
             margin-top: 3rem;
             margin-bottom: 3rem;
         }
+        /* Navigation link styling with hover effect */
         .nav-link {
             transition: color 0.2s ease-in-out, border-color 0.2s ease-in-out;
             padding-bottom: 4px;
             border-bottom: 2px solid transparent;
-            color: #403D39; /* Match body text color */
+            color: #403D39;
         }
         .nav-link:hover {
             color: #5C554F;
-            border-bottom-color: #DCD8D3; /* A subtle warm gray for the underline */
+            border-bottom-color: #DCD8D3; /* Subtle underline on hover */
         }
+        /* Header styling */
         header {
-            border-bottom: 1px solid #EAE8E4; /* Subtle separator */
+            border-bottom: 1px solid #EAE8E4;
             padding-bottom: 2rem;
         }
+        /* Article image styling */
         .article-image {
             width: 100%;
             height: 300px;
@@ -59,6 +68,7 @@
             border-radius: 8px;
             margin-bottom: 1.5rem;
         }
+        /* Metadata styling (date, category) */
         .article-meta {
             color: #8B8680;
             font-size: 0.9rem;
@@ -70,7 +80,7 @@
 
     <div class="max-w-4xl mx-auto px-6 py-12 sm:py-20">
 
-        <!-- Header -->
+        <!-- Header Section -->
         <header class="flex flex-col md:flex-row justify-between items-center mb-12">
             <div>
                 <h1 class="text-4xl md:text-5xl font-bold tracking-tight">
@@ -78,21 +88,24 @@
                 </h1>
                 <p class="mt-2 text-lg text-gray-600" style="font-family: 'Lora', serif;">Thoughts on building things that are made to last.</p>
             </div>
+            <!-- Main Navigation -->
             <nav class="mt-6 md:mt-0">
                 <ul class="flex flex-wrap justify-center md:justify-end space-x-6 text-sm font-semibold">
-                    <li><a href="{{ url_for('index') }}#networks" class="nav-link">Networks</a></li>
-                    <li><a href="{{ url_for('index') }}#automotive" class="nav-link">Automotive</a></li>
-                    <li><a href="{{ url_for('index') }}#aviation" class="nav-link">Aviation</a></li>
-                    <li><a href="{{ url_for('index') }}#linux" class="nav-link">Linux</a></li>
-                    <li><a href="{{ url_for('index') }}#python" class="nav-link">Python</a></li>
-                    <li><a href="{{ url_for('index') }}#embedded" class="nav-link">Embedded</a></li>
+                    <!-- Links now point directly to individual article pages -->
+                    <li><a href="{{ url_for('article', article_id='networks') }}" class="nav-link">Networks</a></li>
+                    <li><a href="{{ url_for('article', article_id='automotive') }}" class="nav-link">Automotive</a></li>
+                    <li><a href="{{ url_for('article', article_id='aviation') }}" class="nav-link">Aviation</a></li>
+                    <li><a href="{{ url_for('article', article_id='linux') }}" class="nav-link">Linux</a></li>
+                    <li><a href="{{ url_for('article', article_id='python') }}" class="nav-link">Python</a></li>
+                    <li><a href="{{ url_for('article', article_id='embedded') }}" class="nav-link">Embedded</a></li>
                 </ul>
             </nav>
         </header>
 
+        <!-- Main content block, to be filled by child templates -->
         {% block content %}{% endblock %}
 
-        <!-- Footer -->
+        <!-- Footer Section -->
         <footer class="text-center mt-24">
             <p class="text-sm text-gray-500">&copy; 2025 Daudi's Perspective. All Rights Reserved.</p>
         </footer>
