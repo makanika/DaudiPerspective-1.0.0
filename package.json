@@ -6,8 +6,6 @@
     "build": "next build",
     "dev": "next dev",
     "lint": "eslint .",
-    "pages:build": "pnpm build",
-    "pages:deploy": "pnpm build",
     "preview": "pnpm build && pnpm start",
     "start": "next start"
   },

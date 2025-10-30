@@ -1,6 +1,0 @@
-name = "daudis-perspective"
-compatibility_date = "2025-01-30"
-pages_build_output_dir = "out"
-
-[site]
-bucket = "./out"

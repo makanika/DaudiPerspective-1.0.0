@@ -54,10 +54,11 @@ git push -u origin main
    \`\`\`
    Project name: daudis-perspective
    Production branch: main
-   Framework preset: Next.js
-   Build command: pnpm build
+   Framework preset: Next.js (Static HTML Export)
+   Build command: npm run build
    Build output directory: out
-   Root directory: /
+   Root directory: / (leave empty)
+   Node version: 22
    \`\`\`
 
 5. **Environment Variables** (if needed)
@@ -102,24 +103,20 @@ This will open a browser window for authentication.
 
 \`\`\`bash
 # Install dependencies
-pnpm install
+npm install
 
 # Build the project
-pnpm build
+npm run build
 \`\`\`
 
 #### Step 4: Deploy
 
 \`\`\`bash
-# Deploy to Cloudflare Pages
+# Deploy to Cloudflare Pages (first time)
 wrangler pages deploy out --project-name=daudis-perspective
-\`\`\`
 
-#### Step 5: Subsequent Deployments
-
-\`\`\`bash
-# Build and deploy in one go
-pnpm build && wrangler pages deploy out --project-name=daudis-perspective
+# For subsequent deployments
+npm run build && wrangler pages deploy out --project-name=daudis-perspective
 \`\`\`
 
 ## Custom Domain Setup
@@ -221,29 +218,7 @@ Cloudflare Pages automatically provides:
 ### Automatic Optimizations
 - Brotli compression
 - HTTP/3 support
-- Image optimization (if using Cloudflare Images)
 - Minification of HTML, CSS, JS
-
-### Additional Optimizations
-
-1. **Enable Cloudflare Analytics**
-   - Go to your Pages project
-   - Click "Analytics" tab
-   - View real-time traffic and performance metrics
-
-2. **Configure Cache Rules** (Optional)
-   \`\`\`toml
-   # Add to wrangler.toml for advanced caching
-   [[headers]]
-   for = "/*"
-   [headers.values]
-   Cache-Control = "public, max-age=3600, s-maxage=86400"
-   
-   [[headers]]
-   for = "/images/*"
-   [headers.values]
-   Cache-Control = "public, max-age=31536000, immutable"
-   \`\`\`
 
 ## Monitoring and Analytics
 
@@ -255,34 +230,7 @@ Cloudflare Pages provides:
 - Performance metrics
 - Bandwidth usage
 
-### Custom Analytics
-
-The project includes Vercel Analytics. To use Cloudflare Web Analytics instead:
-
-1. **Enable Web Analytics**
-   - Go to Cloudflare dashboard
-   - Navigate to "Analytics & Logs" > "Web Analytics"
-   - Click "Add a site"
-   - Copy the beacon script
-
-2. **Add to Layout**
-   \`\`\`tsx
-   // app/layout.tsx
-   export default function RootLayout({ children }) {
-     return (
-       <html lang="en">
-         <head>
-           <script
-             defer
-             src='https://static.cloudflareinsights.com/beacon.min.js'
-             data-cf-beacon='{"token": "your-token-here"}'
-           />
-         </head>
-         <body>{children}</body>
-       </html>
-     )
-   }
-   \`\`\`
+Access analytics in your Cloudflare Pages dashboard under the "Analytics" tab.
 
 ## Troubleshooting
 
@@ -290,37 +238,35 @@ The project includes Vercel Analytics. To use Cloudflare Web Analytics instead:
 
 **Issue**: Build fails with "Command not found: pnpm"
 
-**Solution**: Change build command to use npm:
-\`\`\`
-Build command: npm run build
-\`\`\`
+**Solution**: The build command is set to `npm run build` which should work by default.
 
 **Issue**: Build fails with TypeScript errors
 
-**Solution**: The config already has `ignoreBuildErrors: true`, but you can also:
+**Solution**: The config has `ignoreBuildErrors: true`, but you can fix errors locally:
 \`\`\`bash
-# Fix TypeScript errors locally
-pnpm run lint
+npm run lint
 \`\`\`
+
+**Issue**: Build output directory not found
+
+**Solution**: Ensure the build output directory is set to `out` in Cloudflare Pages settings.
 
 ### Deployment Issues
 
 **Issue**: Site shows 404 errors
 
-**Solution**: Verify build output directory is set to `out`
+**Solution**: 
+1. Verify build output directory is set to `out`
+2. Check that `output: 'export'` is in next.config.mjs
+3. Review build logs for errors
 
 **Issue**: Images not loading
 
-**Solution**: Ensure images are in `public/images/` directory
+**Solution**: Ensure images are in `public/images/` directory and referenced correctly.
 
-### Performance Issues
+**Issue**: Styles not applying
 
-**Issue**: Slow initial load
-
-**Solution**: 
-- Enable Cloudflare's "Auto Minify" in dashboard
-- Use WebP format for images
-- Implement lazy loading for images
+**Solution**: Check that globals.css is imported in app/layout.tsx
 
 ## Security
 
@@ -328,26 +274,7 @@ Cloudflare Pages automatically provides:
 
 - **DDoS Protection**: Automatic mitigation
 - **SSL/TLS**: Free SSL certificates with auto-renewal
-- **WAF**: Web Application Firewall (on paid plans)
 - **Bot Protection**: Automatic bot detection
-
-### Additional Security
-
-1. **Enable Security Headers**
-   \`\`\`toml
-   # Add to wrangler.toml
-   [[headers]]
-   for = "/*"
-   [headers.values]
-   X-Frame-Options = "DENY"
-   X-Content-Type-Options = "nosniff"
-   Referrer-Policy = "strict-origin-when-cross-origin"
-   Permissions-Policy = "geolocation=(), microphone=(), camera=()"
-   \`\`\`
-
-2. **Configure Access Policies** (Optional)
-   - Restrict access to preview deployments
-   - Set up Cloudflare Access for admin areas
 
 ## Costs
 
@@ -358,32 +285,7 @@ Cloudflare Pages automatically provides:
 - 1 build at a time
 - 20,000 files per deployment
 
-### Paid Plans:
-- **Pro ($20/month)**: 5,000 builds/month, 5 concurrent builds
-- **Business ($200/month)**: 20,000 builds/month, 20 concurrent builds
-
 For a personal blog, the free tier is more than sufficient.
-
-## Backup Strategy
-
-### Automated Backups
-
-Since your content is in Git:
-\`\`\`bash
-# Your entire site is backed up in Git
-git log --oneline  # View history
-git checkout <commit-hash>  # Restore previous version
-\`\`\`
-
-### Manual Backups
-
-\`\`\`bash
-# Create backup of articles
-cp data/articles.json backups/articles-$(date +%Y%m%d).json
-
-# Create backup of images
-tar -czf backups/images-$(date +%Y%m%d).tar.gz public/images/
-\`\`\`
 
 ## Rollback
 
@@ -401,73 +303,7 @@ tar -czf backups/images-$(date +%Y%m%d).tar.gz public/images/
 # Revert to previous commit
 git revert HEAD
 git push origin main
-
-# Or reset to specific commit
-git reset --hard <commit-hash>
-git push origin main --force
 \`\`\`
-
-## Advanced Features
-
-### Preview Branches
-
-Create preview environments for testing:
-
-\`\`\`bash
-# Create feature branch
-git checkout -b feature/new-design
-
-# Make changes and push
-git push origin feature/new-design
-
-# Get preview URL from Cloudflare dashboard
-\`\`\`
-
-### Environment Variables
-
-For different environments:
-
-\`\`\`bash
-# Production variables (set in Cloudflare dashboard)
-NEXT_PUBLIC_SITE_URL=https://daudisperspective.com
-
-# Preview variables
-NEXT_PUBLIC_SITE_URL=https://preview.daudisperspective.com
-\`\`\`
-
-### Functions (Advanced)
-
-Add serverless functions for dynamic features:
-
-\`\`\`typescript
-// functions/api/contact.ts
-export async function onRequest(context) {
-  return new Response(JSON.stringify({ message: "Hello from Cloudflare!" }), {
-    headers: { "Content-Type": "application/json" },
-  })
-}
-\`\`\`
-
-## Migration from Other Platforms
-
-### From Vercel
-
-1. Export your project
-2. Push to GitHub
-3. Follow Git integration steps above
-4. Update DNS to point to Cloudflare
-
-### From Netlify
-
-1. Same as Vercel - push to GitHub
-2. Update build settings if needed
-3. Update DNS records
-
-### From Traditional Hosting
-
-1. Push your code to GitHub
-2. Follow Git integration steps
-3. Update DNS A/CNAME records
 
 ## Support and Resources
 
@@ -480,16 +316,11 @@ export async function onRequest(context) {
 - [Cloudflare Community](https://community.cloudflare.com/)
 - [Cloudflare Discord](https://discord.gg/cloudflaredev)
 
-### Getting Help
-- Check deployment logs in Cloudflare dashboard
-- Review build output for errors
-- Contact Cloudflare support (paid plans)
-
 ## Success Checklist
 
 - [ ] Code pushed to GitHub
 - [ ] Cloudflare Pages project created
-- [ ] Build settings configured correctly
+- [ ] Build settings configured correctly (build command: `npm run build`, output: `out`)
 - [ ] First deployment successful
 - [ ] Site accessible via .pages.dev URL
 - [ ] Custom domain configured (optional)
