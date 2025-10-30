@@ -1,42 +1,41 @@
 # Daudi's Perspective Blog
 
-A Flask-based blog application preserving the original design and styling while adding dynamic functionality.
+A modern blog application built with Next.js 16, featuring a clean design with Lora and Lato fonts, warm color scheme, and responsive layout.
 
 ## Features
 
-- **Preserved Design**: Maintains the exact original styling with Lora and Lato fonts, warm color scheme, and subtle checkered background
+- **Modern Stack**: Built with Next.js 16, React 19, and TypeScript
+- **Preserved Design**: Maintains warm color scheme with Lora and Lato fonts
+- **Static Site Generation**: Optimized for performance and SEO
 - **Dynamic Content**: Articles stored in JSON format for easy management
 - **Individual Article Pages**: Each article has its own URL
+- **Category Pages**: Browse articles by category
 - **Responsive Design**: Works on all device sizes
 - **SEO Friendly**: Proper meta tags and semantic HTML
-- **Weekly Updates**: Built-in system for adding new articles
-- **Digital Ocean Ready**: Configured for production deployment
+- **Cloudflare Ready**: Configured for Cloudflare Pages deployment
 
 ## Project Structure
 
 \`\`\`
-blog/
-├── app.py                 # Main Flask application
-├── config.py             # Configuration settings
-├── requirements.txt      # Python dependencies
-├── .env                 # Environment variables
-├── Procfile             # For deployment
-├── runtime.txt          # Python version
-├── templates/
-│   ├── base.html        # Base template with original styling
-│   ├── index.html       # Main blog page
-│   └── article.html     # Individual article page
-├── static/
-│   └── images/          # Article images
+daudis-perspective/
+├── app/
+│   ├── layout.tsx           # Root layout with fonts
+│   ├── page.tsx             # Home page
+│   ├── article/[id]/        # Individual article pages
+│   └── category/[category]/ # Category pages
+├── components/
+│   ├── header.tsx           # Site header
+│   └── ui/                  # shadcn/ui components
+├── lib/
+│   ├── articles.ts          # Article data functions
+│   └── utils.ts             # Utility functions
 ├── data/
-│   └── articles.json    # Article content and metadata
-├── utils/
-│   ├── article_updater.py    # Weekly update utility
-│   └── create_placeholders.py # Image placeholder generator
-└── deployment/
-    ├── deploy.sh        # Deployment script
-    ├── gunicorn.conf.py # Gunicorn configuration
-    └── nginx.conf       # Nginx configuration
+│   └── articles.json        # Article content and metadata
+├── public/
+│   └── images/              # Article images
+├── next.config.mjs          # Next.js configuration
+├── wrangler.toml            # Cloudflare configuration
+└── CLOUDFLARE_DEPLOYMENT.md # Deployment guide
 \`\`\`
 
 ## Quick Start
@@ -45,48 +44,67 @@ blog/
 
 1. **Install Dependencies**
    \`\`\`bash
-   cd blog
-   pip install -r requirements.txt
+   # Using pnpm (recommended)
+   pnpm install
+   
+   # Or using npm
+   npm install
    \`\`\`
 
-2. **Create Placeholder Images**
+2. **Run Development Server**
    \`\`\`bash
-   python utils/create_placeholders.py
+   pnpm dev
+   # or
+   npm run dev
    \`\`\`
 
-3. **Run the Application**
-   \`\`\`bash
-   python app.py
-   \`\`\`
+3. **Visit** http://localhost:3000
 
-4. **Visit** http://localhost:5000
+### Production Build
 
-### Production Deployment (Digital Ocean)
+\`\`\`bash
+# Build for production
+pnpm build
 
-1. **Prepare Your Droplet**
-   - Create a Ubuntu 20.04+ droplet
-   - Point your domain to the droplet's IP
+# Preview production build
+pnpm start
+\`\`\`
 
-2. **Upload Your Code**
-   \`\`\`bash
-   scp -r blog/ user@your-server:/var/www/
-   \`\`\`
+## Deployment Options
 
-3. **Run Deployment Script**
-   \`\`\`bash
-   ssh user@your-server
-   cd /var/www/blog
-   chmod +x deployment/deploy.sh
-   sudo ./deployment/deploy.sh
-   \`\`\`
+### Option 1: Cloudflare Pages (Recommended)
 
-4. **Configure Domain**
-   - Update `deployment/nginx.conf` with your domain
-   - Restart nginx: `sudo systemctl restart nginx`
+Cloudflare Pages provides global CDN, automatic deployments, and unlimited bandwidth on the free tier.
+
+**Quick Deploy:**
+1. Push your code to GitHub
+2. Connect repository to Cloudflare Pages
+3. Configure build settings:
+   - Build command: `pnpm build`
+   - Build output: `out`
+   - Framework: Next.js
+
+See [CLOUDFLARE_DEPLOYMENT.md](./CLOUDFLARE_DEPLOYMENT.md) for detailed instructions.
+
+### Option 2: Vercel
+
+\`\`\`bash
+# Install Vercel CLI
+npm i -g vercel
+
+# Deploy
+vercel
+\`\`\`
+
+### Option 3: Traditional Hosting (Flask Version)
+
+The repository also includes a Flask version for traditional server deployment.
+
+See [DEPLOYMENT.md](./DEPLOYMENT.md) for Digital Ocean deployment instructions.
 
 ## Article Management
 
-### Current Articles (All dated July 14, 2025)
+### Current Articles
 
 1. **Networks**: "The Internet in Africa is Just a Connection to Europe"
 2. **Automotive**: "The Soul of the Machine" 
@@ -97,161 +115,295 @@ blog/
 
 ### Adding New Articles
 
-1. **Using the Article Updater**
+1. **Edit articles.json**
    \`\`\`bash
-   # See current articles
-   python utils/article_updater.py list
-   
-   # Create a sample article template
-   python utils/article_updater.py sample > new_article.json
-   
-   # Edit the JSON file with your content
-   # Then add it to the blog
-   python utils/article_updater.py add new_article.json
+   # Open the data file
+   nano data/articles.json
    \`\`\`
 
-2. **Manual JSON Format**
+2. **Add Article Entry**
    \`\`\`json
    {
-     "id": "unique-article-id",
-     "title": "Article Title",
-     "category": "Category",
-     "date": "Month Day, Year",
-     "image": "image-filename.jpg",
+     "id": "unique-article-slug",
+     "title": "Your Article Title",
+     "category": "Engineering",
+     "date": "January 30, 2025",
+     "image": "article-image.jpg",
      "content": [
-       "First paragraph...",
+       "First paragraph of your article...",
        "Second paragraph...",
-       "etc..."
+       "Continue with more paragraphs..."
      ]
    }
    \`\`\`
 
-### Weekly Updates
+3. **Add Article Image**
+   \`\`\`bash
+   # Add image to public/images/
+   cp ~/Downloads/article-image.jpg public/images/
+   \`\`\`
 
-Set up a cron job for weekly article reminders:
-\`\`\`bash
-# Edit crontab
-crontab -e
+4. **Deploy Changes**
+   
+   **For Cloudflare Pages:**
+   \`\`\`bash
+   git add data/articles.json public/images/article-image.jpg
+   git commit -m "Add new article: Your Article Title"
+   git push origin main
+   # Automatic deployment in 2-5 minutes
+   \`\`\`
+   
+   **For local testing:**
+   \`\`\`bash
+   pnpm dev
+   # Visit http://localhost:3000
+   \`\`\`
 
-# Add this line for Monday 9 AM reminders
-0 9 * * 1 cd /var/www/blog && python utils/article_updater.py list >> /var/log/weekly_update.log 2>&1
+### Article JSON Format
+
+\`\`\`json
+{
+  "articles": [
+    {
+      "id": "unique-slug",
+      "title": "Article Title",
+      "category": "Category Name",
+      "date": "Month Day, Year",
+      "image": "image-filename.jpg",
+      "content": [
+        "Paragraph 1...",
+        "Paragraph 2...",
+        "Paragraph 3..."
+      ]
+    }
+  ]
+}
 \`\`\`
 
 ## Image Management
 
-### Current Placeholder Images
+### Image Guidelines
 
-The blog includes placeholder images for all articles. To replace with real images:
+- **Size**: 1200x600 pixels (2:1 aspect ratio)
+- **Format**: JPEG or WebP
+- **Quality**: 80-90% for optimal balance
+- **Location**: `public/images/`
+- **Naming**: Use descriptive kebab-case names
 
-1. **Download Images**
-   - Use Unsplash, Pexels, or other free stock photo sites
-   - Recommended search terms:
-     - Networks: "fiber optic cables", "network infrastructure"
-     - Automotive: "Toyota Land Cruiser", "off-road vehicle"
-     - Aviation: "jet engine", "turbofan engine"
-     - Linux: "Ubuntu desktop", "terminal screen"
-     - Python: "microcontroller", "ESP32", "programming"
-     - Embedded: "circuit board", "electronics"
+### Finding Images
 
-2. **Prepare Images**
-   - Resize to 1200x600 pixels
-   - Optimize for web (JPEG, 80-90% quality)
-   - Name according to articles.json
+Free stock photo sources:
+- [Unsplash](https://unsplash.com) - High-quality free images
+- [Pexels](https://pexels.com) - Free stock photos
+- [Pixabay](https://pixabay.com) - Free images and videos
 
-3. **Upload**
-   \`\`\`bash
-   scp image.jpg user@server:/var/www/blog/static/images/
-   \`\`\`
+### Optimizing Images
+
+\`\`\`bash
+# Using ImageMagick
+convert original.jpg -resize 1200x600^ -gravity center -extent 1200x600 -quality 85 optimized.jpg
+
+# Using sharp (Node.js)
+npx sharp-cli resize 1200 600 --fit cover --quality 85 input.jpg -o output.jpg
+\`\`\`
 
 ## Customization
 
 ### Styling
-- All original CSS is preserved in `templates/base.html`
-- Colors: Warm off-white background (#FDFDFB), brown headings (#5C554F)
-- Fonts: Lora (serif) for body, Lato (sans-serif) for headings
-- Subtle checkered background pattern maintained
 
-### Configuration
-- Edit `.env` for environment variables
-- Modify `config.py` for Flask settings
-- Update `data/articles.json` for content
+The design uses:
+- **Fonts**: Lora (serif) for body, Lato (sans-serif) for headings
+- **Colors**: Warm off-white background (#FDFDFB), brown tones (#5C554F, #403D39)
+- **Background**: Subtle checkered pattern
+- **Design Tokens**: Defined in `app/globals.css`
 
-### Navigation
-- Categories automatically link to article sections
-- Individual article URLs: `/article/article-id`
-- Home page shows all articles in order
+### Modifying Colors
 
-## Security & Performance
+Edit `app/globals.css`:
+\`\`\`css
+:root {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  /* ... more tokens ... */
+}
+\`\`\`
 
-- **Environment Variables**: Sensitive data in `.env`
-- **Static Files**: Served efficiently by Nginx
-- **Process Management**: Supervised by systemd
-- **Logging**: Comprehensive error and access logs
-- **Firewall**: UFW configured for security
+### Changing Fonts
+
+Edit `app/layout.tsx`:
+\`\`\`typescript
+import { Cute_Font as YourFont, Cute_Font as AnotherFont } from 'next/font/google'
+
+const yourFont = YourFont({ subsets: ['latin'] })
+\`\`\`
+
+## Technology Stack
+
+- **Framework**: Next.js 16
+- **React**: 19.2
+- **TypeScript**: 5
+- **Styling**: Tailwind CSS 4
+- **UI Components**: shadcn/ui with Radix UI
+- **Icons**: Lucide React
+- **Analytics**: Vercel Analytics
+- **Deployment**: Cloudflare Pages / Vercel
+
+## Performance
+
+### Optimizations
+
+- Static site generation for instant page loads
+- Image optimization with Next.js Image component
+- Automatic code splitting
+- CSS optimization with Tailwind CSS
+- Global CDN distribution (Cloudflare/Vercel)
+
+### Lighthouse Scores
+
+Target scores:
+- Performance: 95+
+- Accessibility: 100
+- Best Practices: 100
+- SEO: 100
+
+## Development
+
+### Available Scripts
+
+\`\`\`bash
+# Development server
+pnpm dev
+
+# Production build
+pnpm build
+
+# Start production server
+pnpm start
+
+# Lint code
+pnpm lint
+
+# Deploy to Cloudflare Pages
+pnpm pages:deploy
+\`\`\`
+
+### Project Configuration
+
+- `next.config.mjs` - Next.js configuration
+- `tsconfig.json` - TypeScript configuration
+- `app/globals.css` - Global styles and design tokens
+- `components.json` - shadcn/ui configuration
+- `wrangler.toml` - Cloudflare configuration
 
 ## Monitoring
 
-### Check Application Status
+### Analytics
+
+The project includes Vercel Analytics. For Cloudflare Analytics:
+
+1. Enable Web Analytics in Cloudflare dashboard
+2. Add beacon script to `app/layout.tsx`
+
+### Performance Monitoring
+
 \`\`\`bash
-# Application status
-sudo supervisorctl status daudi_blog
+# Analyze bundle size
+pnpm build
 
-# View logs
-sudo tail -f /var/log/gunicorn/daudi_blog.log
+# Check for unused dependencies
+npx depcheck
 
-# Nginx status
-sudo systemctl status nginx
-\`\`\`
-
-### Health Check
-Visit `/health` endpoint for application status.
-
-## SSL Certificate (Optional)
-
-After deployment, secure with Let's Encrypt:
-\`\`\`bash
-sudo apt install certbot python3-certbot-nginx
-sudo certbot --nginx -d yourdomain.com
+# Audit dependencies
+pnpm audit
 \`\`\`
 
 ## Backup
 
-### Database (JSON)
+### Content Backup
+
 \`\`\`bash
 # Backup articles
-cp /var/www/blog/data/articles.json ~/backup/articles_$(date +%Y%m%d).json
+cp data/articles.json backups/articles-$(date +%Y%m%d).json
+
+# Backup images
+tar -czf backups/images-$(date +%Y%m%d).tar.gz public/images/
 \`\`\`
 
-### Images
+### Git Backup
+
+Your entire site is version-controlled:
 \`\`\`bash
-# Backup images
-tar -czf ~/backup/images_$(date +%Y%m%d).tar.gz /var/www/blog/static/images/
+# View history
+git log --oneline
+
+# Restore previous version
+git checkout <commit-hash>
 \`\`\`
 
 ## Troubleshooting
 
 ### Common Issues
 
-1. **Application Won't Start**
-   - Check logs: `sudo tail -f /var/log/gunicorn/daudi_blog.log`
-   - Verify permissions: `sudo chown -R www-data:www-data /var/www/blog`
+**Build Errors**
+\`\`\`bash
+# Clear cache and rebuild
+rm -rf .next out node_modules
+pnpm install
+pnpm build
+\`\`\`
 
-2. **Images Not Loading**
-   - Check file permissions: `chmod 644 static/images/*`
-   - Verify Nginx configuration
+**TypeScript Errors**
+\`\`\`bash
+# Check for errors
+pnpm run lint
 
-3. **Articles Not Updating**
-   - Validate JSON syntax: `python -m json.tool data/articles.json`
-   - Restart application: `sudo supervisorctl restart daudi_blog`
+# The build ignores TypeScript errors by default
+# See next.config.mjs
+\`\`\`
 
-### Support
+**Images Not Loading**
+- Ensure images are in `public/images/`
+- Check image filenames match articles.json
+- Verify image format (JPEG, PNG, WebP)
 
-For issues or questions:
-1. Check the logs first
-2. Verify configuration files
-3. Test locally before deploying
-4. Ensure all dependencies are installed
+**Deployment Issues**
+- Check build logs in deployment platform
+- Verify build output directory is `out`
+- Ensure all dependencies are in package.json
+
+## Migration
+
+### From Flask Version
+
+The repository includes both Next.js and Flask versions:
+
+- **Next.js**: Modern, static site (recommended)
+- **Flask**: Traditional server-side rendering
+
+Both use the same `data/articles.json` format, so content is compatible.
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test locally
+5. Submit a pull request
 
 ## License
 
-This blog application preserves the original design and content structure while adding modern web application functionality.
+This blog application is a personal project showcasing engineering, aviation, and technology perspectives from an African viewpoint.
+
+## Support
+
+For deployment help:
+- See [CLOUDFLARE_DEPLOYMENT.md](./CLOUDFLARE_DEPLOYMENT.md) for Cloudflare Pages
+- See [DEPLOYMENT.md](./DEPLOYMENT.md) for traditional hosting
+- Check Next.js documentation at [nextjs.org](https://nextjs.org)
+- Visit Cloudflare Pages docs at [developers.cloudflare.com/pages](https://developers.cloudflare.com/pages)
+
+---
+
+**Live Site**: Deploy to see your blog live on Cloudflare Pages or Vercel
+
+**Author**: Daudi - Engineering, Aviation, and Technology from an African Perspective
