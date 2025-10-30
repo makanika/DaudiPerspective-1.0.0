@@ -126,7 +126,7 @@ class WeeklyScheduler:
 {chr(10).join([f'- {idea}' for idea in ideas[:6]])}
 
 ## Quick Commands
-```bash
+\`\`\`bash
 # Create new article
 python utils/article_updater.py sample > new_article.json
 
@@ -135,7 +135,7 @@ python utils/article_updater.py list
 
 # Add article after editing
 python utils/article_updater.py add new_article.json
-```
+\`\`\`
 
 ## Article Template
 Remember to follow the established style:

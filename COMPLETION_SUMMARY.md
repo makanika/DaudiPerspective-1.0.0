@@ -47,7 +47,7 @@
 ## 📊 WHAT WAS CREATED
 
 ### Core Application Files
-```
+\`\`\`
 blog/
 ├── app.py                    # Main Flask application
 ├── config.py                # Configuration management
@@ -55,24 +55,24 @@ blog/
 ├── .env                     # Environment variables
 ├── Procfile                 # Deployment process file
 └── runtime.txt              # Python version
-```
+\`\`\`
 
 ### Templates (Preserving Original Design)
-```
+\`\`\`
 templates/
 ├── base.html               # Base template with exact original styling
 ├── index.html              # Main blog page
 └── article.html            # Individual article pages
-```
+\`\`\`
 
 ### Content and Data
-```
+\`\`\`
 data/
 └── articles.json           # 6 articles, all dated July 14, 2025
-```
+\`\`\`
 
 ### Static Assets
-```
+\`\`\`
 static/
 └── images/                 # Placeholder images for all articles
     ├── network-africa.jpg
@@ -81,30 +81,30 @@ static/
     ├── ubuntu-terminal.jpg
     ├── python-microcontroller.jpg
     └── embedded-systems.jpg
-```
+\`\`\`
 
 ### Utilities and Management
-```
+\`\`\`
 utils/
 ├── article_updater.py      # Add/manage articles
 ├── weekly_scheduler.py     # Weekly update reminders
 └── create_placeholders.py  # Generate placeholder images
-```
+\`\`\`
 
 ### Deployment Configuration
-```
+\`\`\`
 deployment/
 ├── deploy.sh              # Automated deployment script
 ├── gunicorn.conf.py       # Production server config
 └── nginx.conf             # Web server config
-```
+\`\`\`
 
 ### Documentation
-```
+\`\`\`
 ├── README.md              # Comprehensive documentation
 ├── DEPLOYMENT.md          # Step-by-step deployment guide
 └── COMPLETION_SUMMARY.md  # This summary
-```
+\`\`\`
 
 ## 📝 ARTICLES CREATED (All dated July 14, 2025)
 

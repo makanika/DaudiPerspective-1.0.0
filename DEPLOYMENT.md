@@ -18,7 +18,7 @@ This guide will help you deploy the blog to Digital Ocean and set up weekly arti
    - Choose a datacenter region close to your audience
 
 2. **Initial Server Setup**
-   ```bash
+   \`\`\`bash
    # Connect to your server
    ssh root@your-server-ip
    
@@ -31,19 +31,19 @@ This guide will help you deploy the blog to Digital Ocean and set up weekly arti
    
    # Switch to new user
    su - daudi
-   ```
+   \`\`\`
 
 ## Step 2: Upload Your Blog
 
 1. **Prepare Local Files**
-   ```bash
+   \`\`\`bash
    # On your local machine, compress the blog
    cd /path/to/your/blog
    tar -czf daudi-blog.tar.gz blog/
-   ```
+   \`\`\`
 
 2. **Upload to Server**
-   ```bash
+   \`\`\`bash
    # Upload the compressed file
    scp daudi-blog.tar.gz daudi@your-server-ip:~/
    
@@ -52,15 +52,15 @@ This guide will help you deploy the blog to Digital Ocean and set up weekly arti
    tar -xzf daudi-blog.tar.gz
    sudo mv blog /var/www/daudi_blog
    sudo chown -R daudi:daudi /var/www/daudi_blog
-   ```
+   \`\`\`
 
 ## Step 3: Run Deployment Script
 
-```bash
+\`\`\`bash
 cd /var/www/daudi_blog
 chmod +x deployment/deploy.sh
 sudo ./deployment/deploy.sh
-```
+\`\`\`
 
 The deployment script will:
 - Install system dependencies (Python, Nginx, Supervisor)
@@ -78,7 +78,7 @@ The deployment script will:
    - Wait for DNS propagation (up to 24 hours)
 
 2. **Update Nginx Configuration**
-   ```bash
+   \`\`\`bash
    sudo nano /etc/nginx/sites-available/daudi_blog
    
    # Replace 'your-domain.com' with your actual domain
@@ -86,11 +86,11 @@ The deployment script will:
    
    sudo nginx -t  # Test configuration
    sudo systemctl reload nginx
-   ```
+   \`\`\`
 
 ## Step 5: Set Up SSL (Recommended)
 
-```bash
+\`\`\`bash
 # Install Certbot
 sudo apt install certbot python3-certbot-nginx
 
@@ -99,12 +99,12 @@ sudo certbot --nginx -d yourdomain.com -d www.yourdomain.com
 
 # Test automatic renewal
 sudo certbot renew --dry-run
-```
+\`\`\`
 
 ## Step 6: Configure Weekly Updates
 
 1. **Set Up Cron Job**
-   ```bash
+   \`\`\`bash
    crontab -e
    
    # Add this line for Monday 9 AM reminders
@@ -112,14 +112,14 @@ sudo certbot renew --dry-run
    
    # Optional: Check daily and send alerts if overdue
    0 18 * * * cd /var/www/daudi_blog && python utils/weekly_scheduler.py check || echo "Blog needs update!" | mail -s "Blog Update Needed" your-email@example.com
-   ```
+   \`\`\`
 
 2. **Test Weekly Scheduler**
-   ```bash
+   \`\`\`bash
    cd /var/www/daudi_blog
    python utils/weekly_scheduler.py stats
    python utils/weekly_scheduler.py remind
-   ```
+   \`\`\`
 
 ## Step 7: Add Real Images
 
@@ -128,26 +128,26 @@ sudo certbot renew --dry-run
    - Search for relevant terms for each article category
 
 2. **Prepare Images**
-   ```bash
+   \`\`\`bash
    # Resize images to 1200x600 (you can use ImageMagick)
    sudo apt install imagemagick
    convert original-image.jpg -resize 1200x600^ -gravity center -extent 1200x600 resized-image.jpg
-   ```
+   \`\`\`
 
 3. **Upload Images**
-   ```bash
+   \`\`\`bash
    # Upload to server
    scp *.jpg daudi@your-server-ip:/var/www/daudi_blog/static/images/
    
    # Set proper permissions
    sudo chown www-data:www-data /var/www/daudi_blog/static/images/*
    sudo chmod 644 /var/www/daudi_blog/static/images/*
-   ```
+   \`\`\`
 
 ## Step 8: Verify Deployment
 
 1. **Check Services**
-   ```bash
+   \`\`\`bash
    # Check application status
    sudo supervisorctl status daudi_blog
    
@@ -156,7 +156,7 @@ sudo certbot renew --dry-run
    
    # View application logs
    sudo tail -f /var/log/gunicorn/daudi_blog.log
-   ```
+   \`\`\`
 
 2. **Test Website**
    - Visit your domain or server IP
@@ -173,33 +173,33 @@ sudo certbot renew --dry-run
 ### Adding New Articles
 
 1. **Create Article JSON**
-   ```bash
+   \`\`\`bash
    cd /var/www/daudi_blog
    python utils/article_updater.py sample > new_article.json
-   ```
+   \`\`\`
 
 2. **Edit Article Content**
-   ```bash
+   \`\`\`bash
    nano new_article.json
    # Edit the content, title, category, etc.
-   ```
+   \`\`\`
 
 3. **Add to Blog**
-   ```bash
+   \`\`\`bash
    python utils/article_updater.py add new_article.json
-   ```
+   \`\`\`
 
 4. **Restart Application**
-   ```bash
+   \`\`\`bash
    sudo supervisorctl restart daudi_blog
-   ```
+   \`\`\`
 
 ### Weekly Workflow
 
 1. **Monday Morning**: Check reminder log
-   ```bash
+   \`\`\`bash
    tail -f /var/log/blog_reminders.log
-   ```
+   \`\`\`
 
 2. **Write Article**: Use your preferred editor
 
@@ -211,7 +211,7 @@ sudo certbot renew --dry-run
 
 ### Automated Backup Script
 
-```bash
+\`\`\`bash
 #!/bin/bash
 # Save as /home/daudi/backup_blog.sh
 
@@ -232,23 +232,23 @@ find $BACKUP_DIR -name "*.json" -mtime +30 -delete
 find $BACKUP_DIR -name "*.tar.gz" -mtime +30 -delete
 
 echo "Backup completed: $DATE"
-```
+\`\`\`
 
 ### Set Up Automated Backups
 
-```bash
+\`\`\`bash
 chmod +x /home/daudi/backup_blog.sh
 
 # Add to crontab for daily backups at 2 AM
 crontab -e
 0 2 * * * /home/daudi/backup_blog.sh >> /var/log/blog_backup.log 2>&1
-```
+\`\`\`
 
 ## Monitoring and Maintenance
 
 ### Log Monitoring
 
-```bash
+\`\`\`bash
 # Application logs
 sudo tail -f /var/log/gunicorn/daudi_blog.log
 
@@ -260,11 +260,11 @@ sudo tail -f /var/log/nginx/error.log
 
 # System logs
 sudo journalctl -u nginx -f
-```
+\`\`\`
 
 ### Performance Monitoring
 
-```bash
+\`\`\`bash
 # Check disk usage
 df -h
 
@@ -276,11 +276,11 @@ htop
 
 # Check network connections
 netstat -tulpn | grep :80
-```
+\`\`\`
 
 ### Security Updates
 
-```bash
+\`\`\`bash
 # Update system packages monthly
 sudo apt update && sudo apt upgrade -y
 
@@ -289,14 +289,14 @@ cd /var/www/daudi_blog
 source venv/bin/activate
 pip list --outdated
 pip install --upgrade package-name
-```
+\`\`\`
 
 ## Troubleshooting
 
 ### Common Issues
 
 1. **Site Not Loading**
-   ```bash
+   \`\`\`bash
    # Check Nginx status
    sudo systemctl status nginx
    
@@ -305,26 +305,26 @@ pip install --upgrade package-name
    
    # Check firewall
    sudo ufw status
-   ```
+   \`\`\`
 
 2. **Images Not Loading**
-   ```bash
+   \`\`\`bash
    # Check file permissions
    ls -la /var/www/daudi_blog/static/images/
    
    # Fix permissions if needed
    sudo chown -R www-data:www-data /var/www/daudi_blog/static/
    sudo chmod -R 644 /var/www/daudi_blog/static/images/
-   ```
+   \`\`\`
 
 3. **Articles Not Updating**
-   ```bash
+   \`\`\`bash
    # Check JSON syntax
    python -m json.tool /var/www/daudi_blog/data/articles.json
    
    # Restart application
    sudo supervisorctl restart daudi_blog
-   ```
+   \`\`\`
 
 ### Getting Help
 
@@ -338,25 +338,25 @@ pip install --upgrade package-name
 ### Enable Gzip Compression
 
 Add to Nginx configuration:
-```nginx
+\`\`\`nginx
 gzip on;
 gzip_vary on;
 gzip_min_length 1024;
 gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript;
-```
+\`\`\`
 
 ### Cache Static Files
 
-```nginx
+\`\`\`nginx
 location ~* \.(jpg|jpeg|png|gif|ico|css|js)$ {
     expires 1y;
     add_header Cache-Control "public, immutable";
 }
-```
+\`\`\`
 
 ### Monitor Performance
 
-```bash
+\`\`\`bash
 # Install monitoring tools
 sudo apt install htop iotop nethogs
 
@@ -364,7 +364,7 @@ sudo apt install htop iotop nethogs
 htop           # CPU and memory
 iotop          # Disk I/O
 nethogs        # Network usage
-```
+\`\`\`
 
 ## Scaling Considerations
 

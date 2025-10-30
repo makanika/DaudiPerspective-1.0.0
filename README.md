@@ -14,7 +14,7 @@ A Flask-based blog application preserving the original design and styling while 
 
 ## Project Structure
 
-```
+\`\`\`
 blog/
 ├── app.py                 # Main Flask application
 ├── config.py             # Configuration settings
@@ -37,27 +37,27 @@ blog/
     ├── deploy.sh        # Deployment script
     ├── gunicorn.conf.py # Gunicorn configuration
     └── nginx.conf       # Nginx configuration
-```
+\`\`\`
 
 ## Quick Start
 
 ### Local Development
 
 1. **Install Dependencies**
-   ```bash
+   \`\`\`bash
    cd blog
    pip install -r requirements.txt
-   ```
+   \`\`\`
 
 2. **Create Placeholder Images**
-   ```bash
+   \`\`\`bash
    python utils/create_placeholders.py
-   ```
+   \`\`\`
 
 3. **Run the Application**
-   ```bash
+   \`\`\`bash
    python app.py
-   ```
+   \`\`\`
 
 4. **Visit** http://localhost:5000
 
@@ -68,17 +68,17 @@ blog/
    - Point your domain to the droplet's IP
 
 2. **Upload Your Code**
-   ```bash
+   \`\`\`bash
    scp -r blog/ user@your-server:/var/www/
-   ```
+   \`\`\`
 
 3. **Run Deployment Script**
-   ```bash
+   \`\`\`bash
    ssh user@your-server
    cd /var/www/blog
    chmod +x deployment/deploy.sh
    sudo ./deployment/deploy.sh
-   ```
+   \`\`\`
 
 4. **Configure Domain**
    - Update `deployment/nginx.conf` with your domain
@@ -98,7 +98,7 @@ blog/
 ### Adding New Articles
 
 1. **Using the Article Updater**
-   ```bash
+   \`\`\`bash
    # See current articles
    python utils/article_updater.py list
    
@@ -108,10 +108,10 @@ blog/
    # Edit the JSON file with your content
    # Then add it to the blog
    python utils/article_updater.py add new_article.json
-   ```
+   \`\`\`
 
 2. **Manual JSON Format**
-   ```json
+   \`\`\`json
    {
      "id": "unique-article-id",
      "title": "Article Title",
@@ -124,18 +124,18 @@ blog/
        "etc..."
      ]
    }
-   ```
+   \`\`\`
 
 ### Weekly Updates
 
 Set up a cron job for weekly article reminders:
-```bash
+\`\`\`bash
 # Edit crontab
 crontab -e
 
 # Add this line for Monday 9 AM reminders
 0 9 * * 1 cd /var/www/blog && python utils/article_updater.py list >> /var/log/weekly_update.log 2>&1
-```
+\`\`\`
 
 ## Image Management
 
@@ -159,9 +159,9 @@ The blog includes placeholder images for all articles. To replace with real imag
    - Name according to articles.json
 
 3. **Upload**
-   ```bash
+   \`\`\`bash
    scp image.jpg user@server:/var/www/blog/static/images/
-   ```
+   \`\`\`
 
 ## Customization
 
@@ -192,7 +192,7 @@ The blog includes placeholder images for all articles. To replace with real imag
 ## Monitoring
 
 ### Check Application Status
-```bash
+\`\`\`bash
 # Application status
 sudo supervisorctl status daudi_blog
 
@@ -201,7 +201,7 @@ sudo tail -f /var/log/gunicorn/daudi_blog.log
 
 # Nginx status
 sudo systemctl status nginx
-```
+\`\`\`
 
 ### Health Check
 Visit `/health` endpoint for application status.
@@ -209,24 +209,24 @@ Visit `/health` endpoint for application status.
 ## SSL Certificate (Optional)
 
 After deployment, secure with Let's Encrypt:
-```bash
+\`\`\`bash
 sudo apt install certbot python3-certbot-nginx
 sudo certbot --nginx -d yourdomain.com
-```
+\`\`\`
 
 ## Backup
 
 ### Database (JSON)
-```bash
+\`\`\`bash
 # Backup articles
 cp /var/www/blog/data/articles.json ~/backup/articles_$(date +%Y%m%d).json
-```
+\`\`\`
 
 ### Images
-```bash
+\`\`\`bash
 # Backup images
 tar -czf ~/backup/images_$(date +%Y%m%d).tar.gz /var/www/blog/static/images/
-```
+\`\`\`
 
 ## Troubleshooting
 
